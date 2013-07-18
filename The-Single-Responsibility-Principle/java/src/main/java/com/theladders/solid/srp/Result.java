@@ -1,39 +1,38 @@
 package com.theladders.solid.srp;
 
+import com.theladders.solid.srp.job.application.JobApplicationModel;
+
 import java.util.List;
 import java.util.Map;
 
-public class Result
-{
-  private final String type;
-  private final Map<String, Object> model;
-  private final List<String> errorList;
+public class Result {
+    public static final String SUCCESS = "success";
+    public static final String ERROR = "error";
+    public static final String INCOMPLETE = "completeResumePlease";
+    public static final String INVALID_JOB = "invalidJob";
 
-  public Result(String type,
-                Map<String, Object> model)
-  {
-    this.type  = type;
-    this.model = model;
-    this.errorList = null;
-  }
+    private final String type;
+    private final JobApplicationModel model;
+    private final List<String> errorList;
 
-  public Result(String type,
-                Map<String, Object> model,
-                List<String> errList)
-  {
-    this.type  = type;
-    this.model = model;
-    this.errorList = errList;
-  }
+    public Result(String type, JobApplicationModel model) {
+        this.type = type;
+        this.model = model;
+        this.errorList = null;
+    }
 
-  public String getType()
-  {
-    return type;
-  }
+    public Result(String type, JobApplicationModel model, List<String> errList) {
+        this.type = type;
+        this.model = model;
+        this.errorList = errList;
+    }
 
-  @Override
-  public String toString()
-  {
-    return "Result [type=" + type + ", model=" + model + ", errorList=" + errorList + "]";
-  }
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public String toString() {
+        return "Result [type=" + type + ", model=" + model + ", errorList=" + errorList + "]";
+    }
 }

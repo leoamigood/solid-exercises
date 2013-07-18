@@ -2,9 +2,9 @@ package com.theladders.solid.srp.job.application;
 
 import com.theladders.solid.srp.job.Job;
 
-public class FailedApplication extends JobApplicationResult {
+public class InvalidApplication extends JobApplicationResult {
 
-    public FailedApplication(Job job) {
+    public InvalidApplication(Job job) {
         super(job);
     }
 

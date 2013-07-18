@@ -1,23 +1,33 @@
 package com.theladders.solid.srp.jobseeker;
 
-public class JobseekerProfile
-{
-  private final int id;
-  private final ProfileStatus status;
+public class JobSeekerProfile {
+    private final JobSeeker.Id id;
+    private final ProfileStatus status;
 
-  public JobseekerProfile(int id, ProfileStatus status)
-  {
-    this.id = id;
-    this.status = status;
-  }
+    public JobSeekerProfile(JobSeeker.Id id) {
+        this.id = id;
+        this.status = ProfileStatus.NO_PROFILE;
+    }
 
-  public ProfileStatus getStatus()
-  {
-    return status;
-  }
+    public JobSeekerProfile(JobSeeker.Id id, ProfileStatus status) {
+        this.id = id;
+        this.status = status;
+    }
 
-  public int getId()
-  {
-    return id;
-  }
+    public JobSeeker.Id getId() {
+        return id;
+    }
+
+    public boolean isComplete() {
+        boolean completed = true;
+
+        switch (status) {
+            case INCOMPLETE:
+            case NO_PROFILE:
+            case REMOVED:
+                completed = false;
+                break;
+        }
+        return completed;
+    }
 }
