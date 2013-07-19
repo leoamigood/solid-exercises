@@ -13,7 +13,8 @@ import com.theladders.solid.srp.resume.Resume;
 import com.theladders.solid.srp.resume.ResumeManager;
 import com.theladders.solid.srp.service.JobService;
 
-public class ApplyController {
+public class ApplyController
+{
     private JobApplicationRequestParser parser = new JobApplicationRequestParser();
 
     private final JobSearchService jobSearchService;
@@ -22,10 +23,7 @@ public class ApplyController {
     private JobService jobService;
     private JobPolicy policy;
 
-    public ApplyController(JobService jobService,
-                           JobSearchService jobSearchService,
-                           ResumeManager resumeManager,
-                           JobPolicy policy)
+    public ApplyController(JobService jobService, JobSearchService jobSearchService, ResumeManager resumeManager, JobPolicy policy)
     {
         this.jobService = jobService;
         this.jobSearchService = jobSearchService;
@@ -33,7 +31,8 @@ public class ApplyController {
         this.policy = policy;
     }
 
-    public HttpResponse handle(HttpRequest request, HttpResponse response, String name) {
+    public HttpResponse handle(HttpRequest request, HttpResponse response, String name)
+    {
         JobSeeker jobseeker = parser.getJobSeeker(request);
         Job job = jobSearchService.getJob(parser.getJobId(request));
 
@@ -44,7 +43,6 @@ public class ApplyController {
 
         return response;
     }
-
 
 }
 
