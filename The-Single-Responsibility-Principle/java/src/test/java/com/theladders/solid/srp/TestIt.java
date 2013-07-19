@@ -8,6 +8,7 @@ import java.util.Map;
 import com.theladders.solid.srp.job.policy.JobPolicy;
 import com.theladders.solid.srp.job.policy.PremiumCompletedProfilePolicy;
 import com.theladders.solid.srp.jobseeker.*;
+import com.theladders.solid.srp.resume.*;
 import com.theladders.solid.srp.service.JobService;
 import com.theladders.solid.srp.service.JobServiceImpl;
 import org.junit.*;
@@ -22,11 +23,6 @@ import com.theladders.solid.srp.job.application.JobApplicationRepository;
 import com.theladders.solid.srp.job.application.JobApplicationSystem;
 import com.theladders.solid.srp.job.application.SuccessfulApplication;
 import com.theladders.solid.srp.jobseeker.JobSeekerProfile;
-import com.theladders.solid.srp.resume.ActiveResumeRepository;
-import com.theladders.solid.srp.resume.MyResumeManager;
-import com.theladders.solid.srp.resume.Resume;
-import com.theladders.solid.srp.resume.ResumeManager;
-import com.theladders.solid.srp.resume.ResumeRepository;
 
 public class TestIt {
     private static final int INVALID_JOB_ID = 555;
@@ -178,7 +174,7 @@ public class TestIt {
 
         controller.handle(request, response, SHARED_RESUME_NAME);
 
-        assertTrue(resumeRepository.contains(new Resume(SHARED_RESUME_NAME)));
+        assertTrue(resumeRepository.contains(new FileResume(SHARED_RESUME_NAME)));
     }
 
     @Test
@@ -196,7 +192,7 @@ public class TestIt {
 
         controller.handle(request, response, "Save Me Seymour");
 
-        assertEquals(new Resume("Save Me Seymour"), activeResumeRepository.activeResumeFor(new JobSeeker.Id(APPROVED_JOBSEEKER)));
+        assertEquals(new FileResume("Save Me Seymour"), activeResumeRepository.activeResumeFor(new JobSeeker.Id(APPROVED_JOBSEEKER)));
     }
 
     @Before
@@ -248,7 +244,7 @@ public class TestIt {
     private void setupActiveResumeRepository() {
         activeResumeRepository = new ActiveResumeRepository();
 
-        activeResumeRepository.makeActive(new JobSeeker.Id(JOBSEEKER_WITH_RESUME), new Resume("Blammo"));
+        activeResumeRepository.makeActive(new JobSeeker.Id(JOBSEEKER_WITH_RESUME), new FileResume("Blammo"));
     }
 
     private void setupJobApplicationRepository() {
@@ -260,7 +256,7 @@ public class TestIt {
     private void addToJobApplicationRepository() {
         JobSeeker JOBSEEKER = new JobSeekerPremium(new JobSeeker.Id(APPROVED_JOBSEEKER));
         Job job = new Job(new Job.Id(15));
-        Resume resume = new Resume("foo");
+        Resume resume = new FileResume("foo");
 
         existingApplication = new SuccessfulApplication(JOBSEEKER, job, resume);
 

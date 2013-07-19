@@ -10,6 +10,6 @@ public class InvalidApplication extends JobApplicationResult {
 
     @Override
     public Status getStatus() {
-        return Status.FAILURE;
+        return Status.INVALID;
     }
 }

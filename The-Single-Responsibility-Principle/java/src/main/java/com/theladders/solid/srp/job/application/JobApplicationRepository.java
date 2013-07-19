@@ -6,31 +6,25 @@ import java.util.List;
 import com.theladders.solid.srp.job.Job;
 import com.theladders.solid.srp.jobseeker.JobSeeker;
 
-public class JobApplicationRepository
-{
-  private final List<SuccessfulApplication> applications;
+public class JobApplicationRepository {
+    private final List<SuccessfulApplication> applications;
 
-  public JobApplicationRepository()
-  {
-    this.applications = new ArrayList<>();
-  }
-
-  public void add(SuccessfulApplication application)
-  {
-    applications.add(application);
-  }
-
-  public boolean applicationExistsFor(JobSeeker jobseeker, Job job)
-  {
-    for(SuccessfulApplication application : applications)
-    {
-      if (application.getJobSeeker().equals(jobseeker) &&
-          application.getJob().equals(job))
-      {
-        return true;
-      }
+    public JobApplicationRepository() {
+        this.applications = new ArrayList<>();
     }
 
-    return false;
-  }
+    public void add(SuccessfulApplication application) {
+        applications.add(application);
+    }
+
+    public boolean applicationExistsFor(JobSeeker jobseeker, Job job) {
+        for (SuccessfulApplication application : applications) {
+            if (application.getJobSeeker().equals(jobseeker) &&
+                    application.getJob().equals(job)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

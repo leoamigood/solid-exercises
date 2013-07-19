@@ -21,11 +21,13 @@ public class ResumeManager {
     }
 
     public Resume saveResume(JobSeeker jobseeker, String fileName) {
-        Resume resume = new Resume(fileName);
+        Resume resume = new FileResume(fileName);
         return repository.saveResume(jobseeker.getId(), resume);
     }
 
     public Resume saveOrUpdate(JobSeeker jobseeker, String name, ResumeAction action) {
+        if (name == null) return new NoneResume();
+
         Resume resume;
         switch (action) {
             case LOAD_ACTIVE:
@@ -34,7 +36,7 @@ public class ResumeManager {
 
             case SAVE_AS_ACTIVE:
                 resume = saveResume(jobseeker, name);
-                repository.makeActive(jobseeker.getId(), resume);
+                saveAsActive(jobseeker, resume);
                 break;
 
             case NONE:

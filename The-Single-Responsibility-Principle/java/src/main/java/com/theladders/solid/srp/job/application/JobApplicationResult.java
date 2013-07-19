@@ -17,8 +17,10 @@ public abstract class JobApplicationResult {
     private String jobTitle;
 
     public JobApplicationResult(Job job) {
-        this.jobId = job.getJobId();
-        this.jobTitle = job.getTitle();
+        if (job != null) {
+            this.jobId = job.getJobId();
+            this.jobTitle = job.getTitle();
+        }
     }
 
     public String getJobTitle() {

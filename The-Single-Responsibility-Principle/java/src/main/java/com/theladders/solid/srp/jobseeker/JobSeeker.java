@@ -59,16 +59,14 @@ public class JobSeeker {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        JobSeeker other = (JobSeeker) obj;
-        if (id != other.id)
-            return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        JobSeeker jobSeeker = (JobSeeker) o;
+
+        if (id != null ? !id.equals(jobSeeker.id) : jobSeeker.id != null) return false;
+
         return true;
     }
 }

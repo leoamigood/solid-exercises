@@ -31,6 +31,7 @@ public class JobServiceImpl implements JobService {
         JobApplicationResult result = new IncompleteApplication(job);
         try {
             if (job == null) return new InvalidApplication(job);
+            if (!resume.isValid()) return new FailedApplication(job);
 
             if (policy.mayApply(seeker, job)) {
                 UnprocessedApplication application = new UnprocessedApplication(seeker, job, resume);

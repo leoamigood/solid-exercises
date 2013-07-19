@@ -4,7 +4,7 @@ import com.theladders.solid.srp.job.Job;
 import com.theladders.solid.srp.jobseeker.JobSeeker;
 import com.theladders.solid.srp.resume.Resume;
 
-public class IncompleteApplication extends FailedApplication {
+public class IncompleteApplication extends JobApplicationResult {
 
     public IncompleteApplication(Job job) {
         super(job);
