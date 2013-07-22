@@ -1,9 +1,7 @@
 package com.theladders.solid.ocp;
 
 import com.theladders.solid.ocp.jobseeker.JobseekerConfidentialityProfileDao;
-import com.theladders.solid.ocp.resume.ConfidentialResumeHandler;
-import com.theladders.solid.ocp.resume.JobseekerProfileManager;
-import com.theladders.solid.ocp.resume.ResumeConfidentialityManager;
+import com.theladders.solid.ocp.resume.*;
 import com.theladders.solid.ocp.user.User;
 
 public class App
@@ -18,7 +16,7 @@ public class App
     int id = 1; // get from command line?
     User user = new User(id);
 
-    resumeConfidentialityManager.makeAllContactInfoNonConfidential(user);
-    resumeConfidentialityManager.makeAllCategoriesNonConfidential(user);
+    resumeConfidentialityManager.makeConfidential(user, new ContactInfoCategories());
+    resumeConfidentialityManager.makeConfidential(user, new AllResumeCategories());
   }
 }
