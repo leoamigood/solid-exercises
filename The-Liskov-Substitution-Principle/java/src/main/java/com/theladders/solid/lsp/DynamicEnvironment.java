@@ -14,58 +14,64 @@ import java.util.Set;
 
 public class DynamicEnvironment extends Environment
 {
-  private final Environment         base;
-  private final Map<String, String> keyMap; // map insecure prop names to secure ones
+    private final Environment base;
+    private final Map<String, String> keyMap; // map insecure prop names to secure ones
 
-  public DynamicEnvironment(Environment base, Map<String, String> propKeyMap)
-  {
-    this.base = base;
-    this.keyMap = propKeyMap;
-  }
-
-  @Override
-  public Collection<Object> values()
-  {
-    // TODO remove masked values
-    // TODO join local instance values
-    return base.values();
-  }
-
-  /**
-   * This method uses a mapped version of the given key to access first its own Map then its
-   * underlying Map.
-   *
-   * @param key
-   *          An environment key like "home"
-   * @return The value for the given key after mapping (e.g. "home" might be mapped to "secureHome")
-   */
-
-  @Override
-  public Object get(Object key)
-  {
-    String realKey = keyMap.get(key);
-    Object value = super.get(realKey != null ? realKey : key);
-    if (value == null)
+    public DynamicEnvironment(Environment base, Map<String, String> propKeyMap)
     {
-      return base.get(realKey != null ? realKey : key);
+        this.base = base;
+        this.keyMap = propKeyMap;
     }
-    return value;
-  }
 
-  @Override
-  public Set<Map.Entry<Object, Object>> entrySet()
-  {
-    Set<Map.Entry<Object, Object>> entrySet = new HashSet<>(super.entrySet());
-    entrySet.addAll(base.entrySet());
-    return Collections.unmodifiableSet(entrySet);
-  }
+    @Override
+    public Collection<Object> values()
+    {
+        // TODO remove masked values
+        // TODO join local instance values
+        return base.values();
+    }
 
-  @Override
-  public Set<Object> keySet()
-  {
-    Set<Object> keySet = new HashSet<>(super.keySet());
-    keySet.addAll(keyMap.keySet());
-    keySet.addAll(base.keySet());
-    return Collections.unmodifiableSet(keySet);
-  }
+    /**
+     * This method uses a mapped version of the given key to access first its own Map then its
+     * underlying Map.
+     *
+     * @param key An environment key like "home"
+     * @return The value for the given key after mapping (e.g. "home" might be mapped to "secureHome")
+     */
+
+    @Override
+    public Object get(Object key)
+    {
+        String realKey = keyMap.get(key);
+        Object value = super.get(realKey != null ? realKey : key);
+        if (value == null) {
+            return base.get(realKey != null ? realKey : key);
+        }
+        return value;
+    }
+
+    @Override
+    public Set<Map.Entry<Object, Object>> entrySet()
+    {
+        Set<Map.Entry<Object, Object>> entrySet = new HashSet<>(super.entrySet());
+        entrySet.addAll(base.entrySet());
+        return Collections.unmodifiableSet(entrySet);
+    }
+
+    @Override
+    public Set<Object> keySet()
+    {
+        Set<Object> keySet = new HashSet<>(super.keySet());
+        keySet.addAll(keyMap.keySet());
+        keySet.addAll(base.keySet());
+        return Collections.unmodifiableSet(keySet);
+    }
+
+    @Override
+    public Object put(Object key, Object value)
+    {
+        super.put(key, value);
+        return base.put(key, value);
+    }
+
 }
