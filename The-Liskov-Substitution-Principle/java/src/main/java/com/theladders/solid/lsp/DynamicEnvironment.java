@@ -1,5 +1,7 @@
 package com.theladders.solid.lsp;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -28,7 +30,7 @@ public class DynamicEnvironment extends Environment
     {
         // TODO remove masked values
         // TODO join local instance values
-        return base.values();
+        return CollectionUtils.union(base.values(), super.values());
     }
 
     /**
@@ -70,8 +72,11 @@ public class DynamicEnvironment extends Environment
     @Override
     public Object put(Object key, Object value)
     {
-        super.put(key, value);
-        return base.put(key, value);
+        if (base.keySet().contains(key)) {
+            return base.put(key, value);
+        } else {
+            return super.put(key, value);
+        }
     }
 
 }
