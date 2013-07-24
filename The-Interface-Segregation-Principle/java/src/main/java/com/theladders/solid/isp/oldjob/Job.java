@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-import com.theladders.solid.isp.oldjob.stubs.City;
 import com.theladders.solid.isp.oldjob.stubs.JobFunction;
 import com.theladders.solid.isp.oldjob.stubs.JobStatus;
 import com.theladders.solid.isp.oldjob.stubs.PositionLevel;
@@ -13,104 +12,70 @@ import com.theladders.solid.isp.oldjob.stubs.Sector;
 /**
  * Job Interface.
  */
-public interface Job extends JobCommon, Serializable
+public interface Job extends JobCommon, LocationAware, JobIdentifiable, JobBenefit, JobPreRequisit, JobAppliable, Serializable
 {
-  /**
-   * Get the City for this job.
-   *
-   * @return the City for this job.
-   */
-  City getCity();
+    /**
+     * Get the (internally set) editor's note.
+     *
+     * @return editor's note.
+     */
+    String getEditorNote();
 
-  /**
-   * Get the (internally set) editor's note.
-   *
-   * @return editor's note.
-   */
-  String getEditorNote();
+    /**
+     * Get the date this job was originally published
+     *
+     * @return the Date the job was originally published
+     */
+    Date getOriginalPublicationDate();
 
-  /**
-   * Returns a unique identifier for this job. In the web application, this currently maps to
-   * job_location_id in the Database. Scripts may use other values.
-   *
-   * @return unique identifier for this job.
-   */
-  int getJobId();
+    /**
+     * Get the date this job was entered into the system.
+     *
+     * @return the Date the job was entered.
+     */
+    Date getEntryDate();
 
-  /**
-   * Return the jobsite id for this job.
-   *
-   * @return jobsite id for this job.
-   */
-  int getJobSiteId();
+    /**
+     * @return The last time this job was updated
+     */
+    Date getUpdateTime();
 
-  /**
-   * Get the date this job was originally published
-   *
-   * @return the Date the job was originally published
-   */
-  Date getOriginalPublicationDate();
+    /**
+     * Get the date this job was published.
+     *
+     * @return the Date the job was published.
+     */
+    Date getPublicationDate();
 
-  /**
-   * Returns the real job_id.
-   *
-   * @return job id
-   */
-  Integer getParentJobId();
+    /**
+     * Get this job's title.
+     *
+     * @return the title for this job.
+     */
+    String getTitle();
 
-  PositionLevel getPositionLevel();
+    PositionLevel getPositionLevel();
 
-  /**
-   * Get the sector for this job.
-   *
-   * @return the sector for this job.
-   */
-  Sector getSector();
+    /**
+     * Get this job's short description.
+     *
+     * @return a summary description of this job.
+     */
+    String getShortDescription();
 
-  /**
-   * Get this job's short description.
-   *
-   * @return a summary description of this job.
-   */
-  String getShortDescription();
+    /**
+     * Refactored so it can be used by both job and JobReq
+     * @return fullJobDescription()
+     *
+     */
+    String getDescription();
 
-  /**
-   * Get the URL for this job. This is only valid for external (harvested) jobs (! isJobReq).
-   *
-   * @return URL for this job.
-   */
-  String getUrl();
+    /**
+     * Get the URL for this job. This is only valid for external (harvested) jobs (! isJobReq).
+     *
+     * @return URL for this job.
+     */
+    String getUrl();
 
-  /**
-   * Does the job have a particular status? There's a legacy thing where a job could have more than
-   * one status, hence this method... Status should be moved out of PublicationInfo though, and this
-   * should be a getStatus() method...
-   *
-   * @param status
-   *          status to check against.
-   * @return true if job has this status, false otherwise.
-   */
-  boolean hasStatus(JobStatus status);
-
-  boolean isDeleted();
-
-  boolean isExpired();
-
-  /**
-   * Is this job filled?
-   *
-   * @return true if this job is filled, false otherwise.
-   */
-  boolean isFilled();
-
-  /**
-   * Is this job a Marketing job? If this flag is set, basic access is allowed to this job (where
-   * otherwise it would be premium) from certain landing pages.
-   *
-   * @return true if this is marked for marketing, false otherwise.
-   */
-  // TODO: This should only ever be true for JobReq, refactor into the JobReq interface
-  boolean isMarketing();
-
-  Collection<JobFunction> getJobFunctions();
+    Collection<JobFunction> getJobFunctions();
 }
