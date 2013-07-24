@@ -1,8 +1,11 @@
 package com.theladders.solid.lsp;
 
+import org.apache.commons.collections.KeyValue;
 import org.junit.Test;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -14,7 +17,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class DynamicEnvironmentTest
 {
-    //what about default constructor?
     DynamicEnvironment environment;
 
     @Test
@@ -67,6 +69,15 @@ public class DynamicEnvironmentTest
         environment = new DynamicEnvironment(new Environment(), new HashMap<String, String>());
         environment.put("key", "original");
         assertTrue(environment.values().contains("original"));
+        assertEquals(1, environment.values().size());
+    }
+
+    @Test
+    public void testEntrySetNewEnvironment()
+    {
+        environment = new DynamicEnvironment(new Environment(), new HashMap<String, String>());
+        environment.put("key", "original");
+        assertTrue(environment.entrySet().contains(new AbstractMap.SimpleEntry("key", "original")));
         assertEquals(1, environment.values().size());
     }
 
