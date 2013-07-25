@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.theladders.solid.isp.oldjob.stubs.*;
 
-public interface JobCommon
+public interface JobCompanyInfo
 {
     /**
      * @return the name of the company

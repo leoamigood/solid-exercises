@@ -5,7 +5,7 @@ package com.theladders.solid.isp.oldjob;
  * Date: 7/24/13
  * Time: 1:42 PM
  */
-public interface JobBenefit
+public interface JobBenefitInfo
 {
     /**
      * Get this job's compensation (text).

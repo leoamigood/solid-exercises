@@ -10,7 +10,7 @@ import java.util.List;
  * Date: 7/24/13
  * Time: 1:46 PM
  */
-public interface JobPreRequisit
+public interface JobPreRequisiteInfo
 {
     /**
      * Returns an object that represents the number of years of experience

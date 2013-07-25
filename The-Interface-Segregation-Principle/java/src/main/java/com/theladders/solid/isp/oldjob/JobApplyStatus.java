@@ -7,7 +7,7 @@ import com.theladders.solid.isp.oldjob.stubs.JobStatus;
  * Date: 7/24/13
  * Time: 1:53 PM
  */
-public interface JobAppliable
+public interface JobApplyStatus
 {
     /**
      * Does the job have a particular status? There's a legacy thing where a job could have more than

@@ -1,81 +1,99 @@
 package com.theladders.solid.isp.oldjob;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
-import com.theladders.solid.isp.oldjob.stubs.JobFunction;
-import com.theladders.solid.isp.oldjob.stubs.JobStatus;
-import com.theladders.solid.isp.oldjob.stubs.PositionLevel;
-import com.theladders.solid.isp.oldjob.stubs.Sector;
+import com.theladders.solid.isp.oldjob.stubs.*;
 
-/**
- * Job Interface.
- */
-public interface Job extends JobCommon, LocationAware, JobIdentifiable, JobBenefit, JobPreRequisit, JobAppliable, Serializable
+public abstract class Job implements JobRequiredInfo
 {
-    /**
-     * Get the (internally set) editor's note.
-     *
-     * @return editor's note.
-     */
-    String getEditorNote();
+    private Date originalPublicationDate;
+    private Date entryDate;
+    private Date publicationDate;
+    private String title;
+    private PositionLevel positionLevel;
+    private String description;
+    private String shortDescription;
+    private Collection<JobFunction> jobFunctions;
 
-    /**
-     * Get the date this job was originally published
-     *
-     * @return the Date the job was originally published
-     */
-    Date getOriginalPublicationDate();
+    public Date getOriginalPublicationDate()
+    {
+        return originalPublicationDate;
+    }
 
-    /**
-     * Get the date this job was entered into the system.
-     *
-     * @return the Date the job was entered.
-     */
-    Date getEntryDate();
+    public void setOriginalPublicationDate(Date originalPublicationDate)
+    {
+        this.originalPublicationDate = originalPublicationDate;
+    }
 
-    /**
-     * @return The last time this job was updated
-     */
-    Date getUpdateTime();
+    public Date getEntryDate()
+    {
+        return entryDate;
+    }
 
-    /**
-     * Get the date this job was published.
-     *
-     * @return the Date the job was published.
-     */
-    Date getPublicationDate();
+    public void setEntryDate(Date entryDate)
+    {
+        this.entryDate = entryDate;
+    }
 
-    /**
-     * Get this job's title.
-     *
-     * @return the title for this job.
-     */
-    String getTitle();
+    public Date getPublicationDate()
+    {
+        return publicationDate;
+    }
 
-    PositionLevel getPositionLevel();
+    public void setPublicationDate(Date publicationDate)
+    {
+        this.publicationDate = publicationDate;
+    }
 
-    /**
-     * Get this job's short description.
-     *
-     * @return a summary description of this job.
-     */
-    String getShortDescription();
+    public String getTitle()
+    {
+        return title;
+    }
 
-    /**
-     * Refactored so it can be used by both job and JobReq
-     * @return fullJobDescription()
-     *
-     */
-    String getDescription();
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
 
-    /**
-     * Get the URL for this job. This is only valid for external (harvested) jobs (! isJobReq).
-     *
-     * @return URL for this job.
-     */
-    String getUrl();
+    public PositionLevel getPositionLevel()
+    {
+        return positionLevel;
+    }
 
-    Collection<JobFunction> getJobFunctions();
+    public void setPositionLevel(PositionLevel positionLevel)
+    {
+        this.positionLevel = positionLevel;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public String getShortDescription()
+    {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription)
+    {
+        this.shortDescription = shortDescription;
+    }
+
+    public Collection<JobFunction> getJobFunctions()
+    {
+        return jobFunctions;
+    }
+
+    public void setJobFunctions(Collection<JobFunction> jobFunctions)
+    {
+        this.jobFunctions = jobFunctions;
+    }
 }
